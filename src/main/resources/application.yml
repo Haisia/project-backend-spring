@@ -1,13 +1,17 @@
 spring:
   application:
     name: backend
+
   datasource:
-    url: jdbc:postgresql://${DB_HOST}:5432/postgres
+    url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.OracleDialect
+        format_sql: true
