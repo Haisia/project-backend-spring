@@ -55,4 +55,20 @@ public class DevNewsServiceImpl implements DevNewsService {
   public BlogGetAllYearMonthResponse getAllYearMonth() {
     return new BlogGetAllYearMonthResponse(blogDevNewsRepository.findAllUniqueYearMonth());
   }
+
+  public List<BlogDevNewsResponse> getAllByYearMonth(String year, String month) {
+    YearMonth yearMonth;
+    try {
+      yearMonth = YearMonth.of(Integer.parseInt(year), Integer.parseInt(month));
+    } catch (NumberFormatException | DateTimeException e) {
+      throw new IllegalArgumentException("Invalid year or month format");
+    }
+
+    LocalDateTime startDate = yearMonth.atDay(1).atStartOfDay();
+    LocalDateTime endDate = yearMonth.atEndOfMonth().atTime(23, 59, 59);
+
+    List<BlogDevNews> newsList = blogDevNewsRepository.findAllByCreatedAtBetween(startDate, endDate);
+
+    return BlogDevNewsResponse.from(newsList);
+  }
 }

@@ -13,5 +13,6 @@ public interface DevNewsService {
   List<BlogDevNewsResponse> getAllDevNews();
   BlogGetAllLatestDveNewsResponse getAllLatestDevNews();
   BlogGetAllYearMonthResponse getAllYearMonth();
+  List<BlogDevNewsResponse> getAllByYearMonth(String year, String month);
 
 }

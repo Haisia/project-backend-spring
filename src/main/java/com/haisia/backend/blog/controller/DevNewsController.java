@@ -43,4 +43,19 @@ public class DevNewsController {
   public ResponseEntity<?> getAllYearMonth() {
     return ResponseEntity.ok(devNewsService.getAllYearMonth());
   }
+
+  @GetMapping("/all/by/year-month/{yearMonth}")
+  public ResponseEntity<?> getAllByYearMonth(@PathVariable String yearMonth) {
+    // 유효성 검증
+    if (!yearMonth.matches("\\d{6}")) { // 6자리 숫자 확인
+      throw new IllegalArgumentException("Invalid yearMonth format. It must be 6 digits (e.g., 202304)");
+    }
+
+    // yearMonth 처리 로직 작성
+    // 예: year = "2023", month = "04"
+    String year = yearMonth.substring(0, 4); // 연도 분리
+    String month = yearMonth.substring(4);   // 월 분리
+
+    return ResponseEntity.ok(devNewsService.getAllByYearMonth(year, month));
+  }
 }
