@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @RequestMapping("/api/blog/devnews")
 @RestController
@@ -30,8 +28,8 @@ public class DevNewsController {
 
   @GetMapping("/all")
   public ResponseEntity<?> getAllDevNews() {
-    List<BlogDevNewsResponse> responses = devNewsService.getAllDevNews();
-    return ResponseEntity.ok(responses);
+    BlogDevNewsResponse response = devNewsService.getAllDevNews();
+    return ResponseEntity.ok(response);
   }
 
   @GetMapping("/all/latest")

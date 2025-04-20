@@ -3,7 +3,7 @@ package com.haisia.backend.blog.dto.devnews;
 import com.haisia.backend.blog.entity.BlogDevNews;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,27 +12,23 @@ import java.util.stream.Collectors;
 @Getter @Setter
 public class BlogDevNewsResponse {
 
-  public Long id;
-  public String title;
-  public String content;
-  private LocalDateTime createdAt;
-  private LocalDateTime updatedAt;
+  public List<BlogDevNewsDto> articles;
 
-
-  public static BlogDevNewsResponse from(BlogDevNews entity) {
-    return BlogDevNewsResponse.builder()
-      .id(entity.getId())
-      .title(entity.getArticle().getTitle())
-      .content(entity.getArticle().getContent())
-      .createdAt(entity.getCreatedAt())
-      .updatedAt(entity.getUpdatedAt())
-      .build();
+  public BlogDevNewsResponse(BlogDevNewsDto article) {
+    this.articles = new ArrayList<>();
+    articles.add(article);
   }
 
-  public static List<BlogDevNewsResponse> from(List<BlogDevNews> entities) {
-    return entities.stream()
-      .map(BlogDevNewsResponse::from)
-      .collect(Collectors.toList())
-      ;
+  public static BlogDevNewsResponse from(BlogDevNews entity) {
+    BlogDevNewsDto dto = BlogDevNewsDto.from(entity);
+    return new BlogDevNewsResponse(dto);
+  }
+
+  public static BlogDevNewsResponse from(List<BlogDevNews> entities) {
+    List<BlogDevNewsDto> articles = entities.stream()
+      .map(BlogDevNewsDto::from)
+      .collect(Collectors.toList());
+
+    return new BlogDevNewsResponse(articles);
   }
 }

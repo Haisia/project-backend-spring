@@ -29,7 +29,7 @@ public class DevNewsServiceImpl implements DevNewsService {
     return BlogDevNewsResponse.from(blogDevNews);
   }
 
-  public List<BlogDevNewsResponse> getAllDevNews() {
+  public BlogDevNewsResponse getAllDevNews() {
     List<BlogDevNews> all = blogDevNewsRepository.findAll();
     return BlogDevNewsResponse.from(all);
   }
@@ -56,7 +56,7 @@ public class DevNewsServiceImpl implements DevNewsService {
     return new BlogGetAllYearMonthResponse(blogDevNewsRepository.findAllUniqueYearMonth());
   }
 
-  public List<BlogDevNewsResponse> getAllByYearMonth(String year, String month) {
+  public BlogDevNewsResponse getAllByYearMonth(String year, String month) {
     YearMonth yearMonth;
     try {
       yearMonth = YearMonth.of(Integer.parseInt(year), Integer.parseInt(month));
