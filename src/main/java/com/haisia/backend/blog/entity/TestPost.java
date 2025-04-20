@@ -1,7 +1,9 @@
 package com.haisia.backend.blog.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class TestPost {
   @Id
