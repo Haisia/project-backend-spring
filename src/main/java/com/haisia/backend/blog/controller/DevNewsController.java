@@ -2,7 +2,6 @@ package com.haisia.backend.blog.controller;
 
 import com.haisia.backend.blog.dto.devnews.BlogDevNewsRequest;
 import com.haisia.backend.blog.dto.devnews.BlogDevNewsResponse;
-import com.haisia.backend.blog.dto.devnews.BlogLatestDevNewsTitleResponse;
 import com.haisia.backend.blog.service.DevNewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +35,12 @@ public class DevNewsController {
   }
 
   @GetMapping("/all/latest")
-  public ResponseEntity<?> getAllLatest() {
-    return ResponseEntity.ok(devNewsService.getAllLatest());
+  public ResponseEntity<?> getAllLatestDevNews() {
+    return ResponseEntity.ok(devNewsService.getAllLatestDevNews());
   }
 
+  @GetMapping("/all/year-month")
+  public ResponseEntity<?> getAllYearMonth() {
+    return ResponseEntity.ok(devNewsService.getAllYearMonth());
+  }
 }

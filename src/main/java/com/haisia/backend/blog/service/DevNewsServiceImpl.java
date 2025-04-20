@@ -1,8 +1,6 @@
 package com.haisia.backend.blog.service;
 
-import com.haisia.backend.blog.dto.devnews.BlogLatestDevNewsTitleResponse;
-import com.haisia.backend.blog.dto.devnews.BlogDevNewsRequest;
-import com.haisia.backend.blog.dto.devnews.BlogDevNewsResponse;
+import com.haisia.backend.blog.dto.devnews.*;
 import com.haisia.backend.blog.entity.BlogDevNews;
 import com.haisia.backend.blog.repository.BlogDevNewsRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +34,7 @@ public class DevNewsServiceImpl implements DevNewsService {
     return BlogDevNewsResponse.from(all);
   }
 
-  public BlogLatestDevNewsTitleResponse getAllLatest() {
+  public BlogGetAllLatestDveNewsResponse getAllLatestDevNews() {
     BlogDevNews latestNews = blogDevNewsRepository.findFirstByOrderByCreatedAtDesc().orElseThrow();
 
     LocalDateTime createdAt = latestNews.getCreatedAt();
@@ -47,10 +45,14 @@ public class DevNewsServiceImpl implements DevNewsService {
 
     List<BlogDevNews> filteredNews = blogDevNewsRepository.findAllByCreatedAtBetween(startDate, endDate);
 
-    return BlogLatestDevNewsTitleResponse.from(
+    return BlogGetAllLatestDveNewsResponse.from(
       filteredNews,
       String.valueOf(yearMonth.getYear()),
       String.valueOf(yearMonth.getMonthValue())
     );
+  }
+
+  public BlogGetAllYearMonthResponse getAllYearMonth() {
+    return new BlogGetAllYearMonthResponse(blogDevNewsRepository.findAllUniqueYearMonth());
   }
 }
