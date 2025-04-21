@@ -17,4 +17,8 @@ public class BlogContentData extends BaseVo {
   @Lob
   @Column(columnDefinition = "CLOB")
   private String content;
+
+  public static BlogContentData of(String title, String content) {
+    return new BlogContentData(title, content);
+  }
 }

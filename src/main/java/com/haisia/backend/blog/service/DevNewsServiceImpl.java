@@ -6,9 +6,11 @@ import com.haisia.backend.blog.entity.DevNews;
 import com.haisia.backend.blog.repository.DevNewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class DevNewsServiceImpl implements DevNewsService {
