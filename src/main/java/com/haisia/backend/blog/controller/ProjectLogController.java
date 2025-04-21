@@ -23,17 +23,17 @@ public class ProjectLogController {
   private final ProjectLogService projectLogService;
 
   @PostMapping
-  public ResponseEntity<?> createProjectLog(@RequestBody CreateProjectLogRequest request) {
+  public ResponseEntity<Long> createProjectLog(@RequestBody CreateProjectLogRequest request) {
     return ResponseEntity.ok(projectLogService.createProjectLog(request));
   }
 
   @PostMapping("/category")
-  public ResponseEntity<?> createProjectLogCategory(@RequestBody CreateProjectLogCategoryRequest request) {
+  public ResponseEntity<Long> createProjectLogCategory(@RequestBody CreateProjectLogCategoryRequest request) {
     return ResponseEntity.ok(projectLogService.createProjectLogCategory(request));
   }
 
   @PostMapping("/post")
-  public ResponseEntity<?> createProjectLogPost(@RequestBody CreateProjectLogPostRequest request) {
+  public ResponseEntity<Long> createProjectLogPost(@RequestBody CreateProjectLogPostRequest request) {
     return ResponseEntity.ok(projectLogService.createProjectLogPost(request));
   }
 

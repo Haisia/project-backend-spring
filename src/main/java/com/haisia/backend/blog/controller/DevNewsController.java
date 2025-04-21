@@ -20,7 +20,7 @@ public class DevNewsController {
   private final DevNewsService devNewsService;
 
   @PostMapping
-  public ResponseEntity<?> postDevNews(@RequestBody DevNewsRequest request) {
+  public ResponseEntity<Void> postDevNews(@RequestBody DevNewsRequest request) {
     devNewsService.postDevNews(request);
     return ResponseEntity.ok().build();
   }
