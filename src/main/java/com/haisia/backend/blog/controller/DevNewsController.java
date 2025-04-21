@@ -1,7 +1,7 @@
 package com.haisia.backend.blog.controller;
 
-import com.haisia.backend.blog.dto.devnews.BlogDevNewsRequest;
-import com.haisia.backend.blog.dto.devnews.BlogDevNewsResponse;
+import com.haisia.backend.blog.dto.devnews.DevNewsRequest;
+import com.haisia.backend.blog.dto.devnews.DevNewsResponse;
 import com.haisia.backend.blog.service.DevNewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,20 +20,20 @@ public class DevNewsController {
   private final DevNewsService devNewsService;
 
   @PostMapping
-  public ResponseEntity<?> postDevNews(@RequestBody BlogDevNewsRequest request) {
+  public ResponseEntity<?> postDevNews(@RequestBody DevNewsRequest request) {
     devNewsService.postDevNews(request);
     return ResponseEntity.ok().build();
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<BlogDevNewsResponse> getDevNews(@PathVariable Long id) {
-    BlogDevNewsResponse response = devNewsService.getDevNews(id);
+  public ResponseEntity<DevNewsResponse> getDevNews(@PathVariable Long id) {
+    DevNewsResponse response = devNewsService.getDevNews(id);
     return ResponseEntity.ok(response);
   }
 
   @GetMapping("/all")
-  public ResponseEntity<BlogDevNewsResponse> getAllDevNews() {
-    BlogDevNewsResponse response = devNewsService.getAllDevNews();
+  public ResponseEntity<DevNewsResponse> getAllDevNews() {
+    DevNewsResponse response = devNewsService.getAllDevNews();
     return ResponseEntity.ok(response);
   }
 }

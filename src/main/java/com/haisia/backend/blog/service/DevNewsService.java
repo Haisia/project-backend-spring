@@ -1,10 +1,10 @@
 package com.haisia.backend.blog.service;
 
-import com.haisia.backend.blog.dto.devnews.BlogDevNewsRequest;
-import com.haisia.backend.blog.dto.devnews.BlogDevNewsResponse;
+import com.haisia.backend.blog.dto.devnews.DevNewsRequest;
+import com.haisia.backend.blog.dto.devnews.DevNewsResponse;
 
 public interface DevNewsService {
-  void postDevNews(BlogDevNewsRequest request);
-  BlogDevNewsResponse getDevNews(Long id);
-  BlogDevNewsResponse getAllDevNews();
+  void postDevNews(DevNewsRequest request);
+  DevNewsResponse getDevNews(Long id);
+  DevNewsResponse getAllDevNews();
 }

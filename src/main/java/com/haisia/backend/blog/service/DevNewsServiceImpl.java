@@ -1,9 +1,9 @@
 package com.haisia.backend.blog.service;
 
-import com.haisia.backend.blog.dto.devnews.BlogDevNewsRequest;
-import com.haisia.backend.blog.dto.devnews.BlogDevNewsResponse;
-import com.haisia.backend.blog.entity.BlogDevNews;
-import com.haisia.backend.blog.repository.BlogDevNewsRepository;
+import com.haisia.backend.blog.dto.devnews.DevNewsRequest;
+import com.haisia.backend.blog.dto.devnews.DevNewsResponse;
+import com.haisia.backend.blog.entity.DevNews;
+import com.haisia.backend.blog.repository.DevNewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +13,24 @@ import java.util.List;
 @Service
 public class DevNewsServiceImpl implements DevNewsService {
 
-  private final BlogDevNewsRepository blogDevNewsRepository;
+  private final DevNewsRepository devNewsRepository;
 
-  public void postDevNews(BlogDevNewsRequest request) {
-    BlogDevNews devNews = BlogDevNews.builder()
+  public void postDevNews(DevNewsRequest request) {
+    DevNews devNews = DevNews.builder()
       .title(request.title)
       .content(request.content)
       .build();
 
-    blogDevNewsRepository.save(devNews);
+    devNewsRepository.save(devNews);
   }
 
-  public BlogDevNewsResponse getDevNews(Long id) {
-    BlogDevNews blogDevNews = blogDevNewsRepository.findById(id).orElseThrow();
-    return BlogDevNewsResponse.from(blogDevNews);
+  public DevNewsResponse getDevNews(Long id) {
+    DevNews devNews = devNewsRepository.findById(id).orElseThrow();
+    return DevNewsResponse.from(devNews);
   }
 
-  public BlogDevNewsResponse getAllDevNews() {
-    List<BlogDevNews> all = blogDevNewsRepository.findAll();
-    return BlogDevNewsResponse.from(all);
+  public DevNewsResponse getAllDevNews() {
+    List<DevNews> all = devNewsRepository.findAll();
+    return DevNewsResponse.from(all);
   }
 }
