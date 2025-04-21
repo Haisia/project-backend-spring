@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Embeddable
-public class Article extends BaseVo {
+public class BlogContentData extends BaseVo {
   private String title;
 
   @Lob

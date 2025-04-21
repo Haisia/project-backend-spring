@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 @Getter @Setter
 public class BlogDevNewsResponse {
 
-  public List<BlogDevNewsDto> articles;
+  public List<BlogDevNewsDto> blogDevNewses;
 
   public BlogDevNewsResponse(BlogDevNewsDto article) {
-    this.articles = new ArrayList<>();
-    articles.add(article);
+    this.blogDevNewses = new ArrayList<>();
+    blogDevNewses.add(article);
   }
 
   public static BlogDevNewsResponse from(BlogDevNews entity) {

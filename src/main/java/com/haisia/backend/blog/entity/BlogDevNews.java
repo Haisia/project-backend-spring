@@ -1,6 +1,6 @@
 package com.haisia.backend.blog.entity;
 
-import com.haisia.backend.blog.entity.vo.Article;
+import com.haisia.backend.blog.entity.vo.BlogContentData;
 import com.haisia.backend.common.entity.BaseJpaEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -17,11 +17,11 @@ public class BlogDevNews extends BaseJpaEntity {
   @SequenceGenerator(name = "blogdevnews_seq_gen", sequenceName = "blogdevnews_seq", allocationSize = 1)
   private Long id;
 
-  private Article article;
+  private BlogContentData contentData;
 
   @Builder
   public BlogDevNews(Long id, String title, String content) {
     this.id = id;
-    this.article = new Article(title, content);
+    this.contentData = new BlogContentData(title, content);
   }
 }
