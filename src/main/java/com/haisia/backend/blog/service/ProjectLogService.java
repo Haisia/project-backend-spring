@@ -11,6 +11,7 @@ public interface ProjectLogService {
   Long createProjectLogCategory(CreateProjectLogCategoryRequest request);
   Long createProjectLogPost(CreateProjectLogPostRequest request);
 
+  GetProjectLogResponse getProjectLog(Long projectId);
   GetProjectLogResponse getProjectLogPost(Long id);
   GetAllProjectLogResponse getAllProjectLogPosts();
 }

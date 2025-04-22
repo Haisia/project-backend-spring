@@ -15,8 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -27,7 +25,7 @@ public class ProjectLogServiceImpl implements ProjectLogService {
   private final ProjectLogPostRepository postRepository;
 
   public Long createProjectLog(CreateProjectLogRequest request) {
-    ProjectLog projectLog = ProjectLog.of(request.title);
+    ProjectLog projectLog = ProjectLog.of(request.title, request.content);
     ProjectLog savedProjectLog = projectRepository.save(projectLog);
     return savedProjectLog.getId();
   }
@@ -46,6 +44,11 @@ public class ProjectLogServiceImpl implements ProjectLogService {
     ProjectLogPost createdPost = category.addPost(request.title, request.content);
     ProjectLogPost savedPost = postRepository.save(createdPost);
     return savedPost.getId();
+  }
+
+  @Override
+  public GetProjectLogResponse getProjectLog(Long projectId) {
+    return GetProjectLogResponse.from(projectRepository.findById(projectId).orElseThrow());
   }
 
   @Override

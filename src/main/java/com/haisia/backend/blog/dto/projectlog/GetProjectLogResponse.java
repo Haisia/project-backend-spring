@@ -19,6 +19,7 @@ public class GetProjectLogResponse {
   public Long categoryId;
   public Long postId;
   public String projectTitle;
+  public String projectContent;
   public String categoryTitle;
   public String postTitle;
   public String postContent;
@@ -33,12 +34,21 @@ public class GetProjectLogResponse {
       .projectId(projectLog.getId())
       .categoryId(category.getId())
       .postId(entity.getId())
-      .projectTitle(projectLog.getTitle())
+      .projectTitle(projectLog.getContentData().getTitle())
+      .projectContent(projectLog.getContentData().getContent())
       .categoryTitle(category.getTitle())
       .postTitle(entity.getContentData().getTitle())
       .postContent(entity.getContentData().getContent())
       .createdAt(entity.getCreatedAt())
       .updatedAt(entity.getUpdatedAt())
+      .build();
+  }
+
+  public static GetProjectLogResponse from(ProjectLog entity) {
+    return GetProjectLogResponse.builder()
+      .projectId(entity.getId())
+      .projectTitle(entity.getContentData().getTitle())
+      .projectContent(entity.getContentData().getContent())
       .build();
   }
 }

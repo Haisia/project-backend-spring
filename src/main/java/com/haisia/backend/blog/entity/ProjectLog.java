@@ -1,5 +1,6 @@
 package com.haisia.backend.blog.entity;
 
+import com.haisia.backend.blog.entity.vo.BlogContentData;
 import com.haisia.backend.common.entity.BaseJpaEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,17 +26,17 @@ public class ProjectLog extends BaseJpaEntity {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blogprojectlog_seq_gen")
   @SequenceGenerator(name = "blogprojectlog_seq_gen", sequenceName = "blogprojectlog_seq", allocationSize = 1)
   private Long id;
-  private String title;
+  private BlogContentData contentData;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectLog", orphanRemoval = true)
   private List<ProjectLogCategory> projectLogCategories = new ArrayList<>();
 
-  public ProjectLog(String title) {
-    this.title = title;
+  public ProjectLog(String title, String content) {
+    this.contentData = BlogContentData.of(title, content);
   }
 
-  public static ProjectLog of(String title) {
-    return new ProjectLog(title);
+  public static ProjectLog of(String title, String content) {
+    return new ProjectLog(title, content);
   }
 
   public ProjectLogCategory addProjectLogCategory(String title) {

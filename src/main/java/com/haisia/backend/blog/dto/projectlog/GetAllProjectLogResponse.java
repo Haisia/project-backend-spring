@@ -12,7 +12,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
@@ -30,6 +29,7 @@ public class GetAllProjectLogResponse {
   private static class Project {
     private Long id;
     private String title;
+    private String content;
     private List<Category> categories = new ArrayList<>();
 
     public static Project from(ProjectLog entity) {
@@ -39,7 +39,8 @@ public class GetAllProjectLogResponse {
 
       return Project.builder()
         .id(entity.getId())
-        .title(entity.getTitle())
+        .title(entity.getContentData().getTitle())
+        .content(entity.getContentData().getContent())
         .categories(categories)
         .build()
         ;

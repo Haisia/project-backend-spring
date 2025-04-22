@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -35,6 +36,11 @@ public class ProjectLogController {
   @PostMapping("/post")
   public ResponseEntity<Long> createProjectLogPost(@RequestBody CreateProjectLogPostRequest request) {
     return ResponseEntity.ok(projectLogService.createProjectLogPost(request));
+  }
+
+  @GetMapping()
+  public ResponseEntity<?> getProjectLog(@RequestParam Long projectId) {
+    return ResponseEntity.ok(projectLogService.getProjectLog(projectId));
   }
 
   @GetMapping("/{id}")

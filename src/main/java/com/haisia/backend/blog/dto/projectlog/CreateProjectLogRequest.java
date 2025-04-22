@@ -9,4 +9,5 @@ import lombok.Setter;
 @Getter @Setter
 public class CreateProjectLogRequest {
   public String title;
+  public String content;
 }
