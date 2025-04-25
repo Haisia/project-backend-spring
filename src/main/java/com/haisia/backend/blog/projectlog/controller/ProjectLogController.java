@@ -4,7 +4,7 @@ import com.haisia.backend.blog.projectlog.dto.CreateProjectLogCategoryRequest;
 import com.haisia.backend.blog.projectlog.dto.CreateProjectLogPostRequest;
 import com.haisia.backend.blog.projectlog.dto.CreateProjectLogRequest;
 import com.haisia.backend.blog.projectlog.dto.GetAllProjectLogResponse;
-import com.haisia.backend.blog.projectlog.dto.GetProjectLogResponse;
+import com.haisia.backend.blog.projectlog.dto.GetProjectLogPostResponse;
 import com.haisia.backend.blog.projectlog.service.ProjectLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,13 +38,13 @@ public class ProjectLogController {
     return ResponseEntity.ok(projectLogService.createProjectLogPost(request));
   }
 
-  @GetMapping()
+  @GetMapping
   public ResponseEntity<?> getProjectLog(@RequestParam Long projectId) {
     return ResponseEntity.ok(projectLogService.getProjectLog(projectId));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<GetProjectLogResponse> getProjectLogPost(@PathVariable Long id) {
+  public ResponseEntity<GetProjectLogPostResponse> getProjectLogPost(@PathVariable Long id) {
     return ResponseEntity.ok(projectLogService.getProjectLogPost(id));
   }
 

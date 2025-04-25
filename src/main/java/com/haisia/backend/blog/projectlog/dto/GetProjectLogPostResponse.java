@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
-public class GetProjectLogResponse {
+public class GetProjectLogPostResponse {
   public Long projectId;
   public Long categoryId;
   public Long postId;
@@ -26,11 +26,11 @@ public class GetProjectLogResponse {
   public LocalDateTime createdAt;
   public LocalDateTime updatedAt;
 
-  public static GetProjectLogResponse from(ProjectLogPost entity) {
+  public static GetProjectLogPostResponse from(ProjectLogPost entity) {
     ProjectLogCategory category = entity.getCategory();
     ProjectLog projectLog = category.getProjectLog();
 
-    return GetProjectLogResponse.builder()
+    return GetProjectLogPostResponse.builder()
       .projectId(projectLog.getId())
       .categoryId(category.getId())
       .postId(entity.getId())
@@ -44,8 +44,8 @@ public class GetProjectLogResponse {
       .build();
   }
 
-  public static GetProjectLogResponse from(ProjectLog entity) {
-    return GetProjectLogResponse.builder()
+  public static GetProjectLogPostResponse from(ProjectLog entity) {
+    return GetProjectLogPostResponse.builder()
       .projectId(entity.getId())
       .projectTitle(entity.getContentData().getTitle())
       .projectContent(entity.getContentData().getContent())

@@ -4,7 +4,7 @@ import com.haisia.backend.blog.projectlog.dto.CreateProjectLogCategoryRequest;
 import com.haisia.backend.blog.projectlog.dto.CreateProjectLogPostRequest;
 import com.haisia.backend.blog.projectlog.dto.CreateProjectLogRequest;
 import com.haisia.backend.blog.projectlog.dto.GetAllProjectLogResponse;
-import com.haisia.backend.blog.projectlog.dto.GetProjectLogResponse;
+import com.haisia.backend.blog.projectlog.dto.GetProjectLogPostResponse;
 import com.haisia.backend.blog.projectlog.entity.ProjectLog;
 import com.haisia.backend.blog.projectlog.entity.ProjectLogCategory;
 import com.haisia.backend.blog.projectlog.entity.ProjectLogPost;
@@ -47,13 +47,13 @@ public class ProjectLogServiceImpl implements ProjectLogService {
   }
 
   @Override
-  public GetProjectLogResponse getProjectLog(Long projectId) {
-    return GetProjectLogResponse.from(projectRepository.findById(projectId).orElseThrow());
+  public GetProjectLogPostResponse getProjectLog(Long projectId) {
+    return GetProjectLogPostResponse.from(projectRepository.findById(projectId).orElseThrow());
   }
 
   @Override
-  public GetProjectLogResponse getProjectLogPost(Long id) {
-    return GetProjectLogResponse.from(postRepository.findById(id).orElseThrow());
+  public GetProjectLogPostResponse getProjectLogPost(Long id) {
+    return GetProjectLogPostResponse.from(postRepository.findById(id).orElseThrow());
   }
 
   @Override
