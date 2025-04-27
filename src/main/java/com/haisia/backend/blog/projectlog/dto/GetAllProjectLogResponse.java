@@ -82,7 +82,7 @@ public class GetAllProjectLogResponse {
     public static Post from(ProjectLogPost entity) {
       return Post.builder()
         .id(entity.getId())
-        .title(entity.getCategory().getTitle())
+        .title(entity.getContentData().getTitle())
         .content(entity.getContentData().getContent())
         .createdAt(entity.getCreatedAt())
         .updatedAt(entity.getUpdatedAt())

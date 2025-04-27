@@ -1,8 +1,6 @@
 package com.haisia.backend.blog.troubleshooting.controller;
 
-import com.haisia.backend.blog.troubleshooting.dto.CreateTroubleshootingCategoryRequest;
-import com.haisia.backend.blog.troubleshooting.dto.CreateTroubleshootingPostRequest;
-import com.haisia.backend.blog.troubleshooting.dto.CreateTroubleshootingRequest;
+import com.haisia.backend.blog.troubleshooting.dto.*;
 import com.haisia.backend.blog.troubleshooting.service.TroubleshootingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +29,12 @@ public class TroubleshootingController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<?> getTroubleshootingPost(@PathVariable Long id) {
+  public ResponseEntity<GetTroubleshootingPostResponse> getTroubleshootingPost(@PathVariable Long id) {
     return ResponseEntity.ok(troubleshootingService.getPost(id));
   }
 
   @GetMapping("/all")
-  public ResponseEntity<?> getAllTroubleshootingPosts() {
+  public ResponseEntity<GetAllTroubleshootingPostsResponse> getAllTroubleshootingPosts() {
     return ResponseEntity.ok(troubleshootingService.getAllPosts());
   }
 }
