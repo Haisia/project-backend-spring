@@ -11,6 +11,8 @@ import com.haisia.backend.blog.projectlog.entity.ProjectLogPost;
 import com.haisia.backend.blog.projectlog.repository.ProjectLogCategoryRepository;
 import com.haisia.backend.blog.projectlog.repository.ProjectLogPostRepository;
 import com.haisia.backend.blog.projectlog.repository.ProjectLogRepository;
+import com.haisia.backend.common.enums.ResponseCode;
+import com.haisia.backend.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +34,11 @@ public class ProjectLogServiceImpl implements ProjectLogService {
 
   @Override
   public Long createProjectLogCategory(CreateProjectLogCategoryRequest request) {
-    ProjectLog foundProjectLog = projectRepository.findById(request.getProjectLogId()).orElseThrow();
+    ProjectLog foundProjectLog = projectRepository.findById(request.getProjectLogId())
+      .orElseThrow(() -> new ApplicationException(
+        ResponseCode.DATABASE_ERROR,
+        String.format("[blog_ProjectLog 조회 실패] id=%s", request.getProjectLogId())
+      ));
     ProjectLogCategory createdCategory = foundProjectLog.addProjectLogCategory(request.getTitle());
     ProjectLogCategory savedCategory = categoryRepository.save(createdCategory);
     return savedCategory.getId();
@@ -40,20 +46,34 @@ public class ProjectLogServiceImpl implements ProjectLogService {
 
   @Override
   public Long createProjectLogPost(CreateProjectLogPostRequest request) {
-    ProjectLogCategory category = categoryRepository.findById(request.getCategoryId()).orElseThrow();
+    ProjectLogCategory category = categoryRepository.findById(request.getCategoryId())
+      .orElseThrow(() -> new ApplicationException(
+        ResponseCode.DATABASE_ERROR,
+        String.format("[blog_ProjectLogCategory 조회 실패] id=%s", request.getCategoryId())
+      ));
     ProjectLogPost createdPost = category.addPost(request.title, request.content);
     ProjectLogPost savedPost = postRepository.save(createdPost);
     return savedPost.getId();
   }
 
   @Override
-  public GetProjectLogPostResponse getProjectLog(Long projectId) {
-    return GetProjectLogPostResponse.from(projectRepository.findById(projectId).orElseThrow());
+  public GetProjectLogPostResponse getProjectLog(Long id) {
+    return GetProjectLogPostResponse.from(projectRepository.findById(id)
+      .orElseThrow(() -> new ApplicationException(
+        ResponseCode.DATABASE_ERROR,
+        String.format("[blog_ProjectLog 조회 실패] id=%s", id)
+      ))
+    );
   }
 
   @Override
   public GetProjectLogPostResponse getProjectLogPost(Long id) {
-    return GetProjectLogPostResponse.from(postRepository.findById(id).orElseThrow());
+    return GetProjectLogPostResponse.from(postRepository.findById(id)
+      .orElseThrow(() -> new ApplicationException(
+        ResponseCode.DATABASE_ERROR,
+        String.format("[blog_ProjectLogPost 조회 실패] id=%s", id)
+      ))
+    );
   }
 
   @Override

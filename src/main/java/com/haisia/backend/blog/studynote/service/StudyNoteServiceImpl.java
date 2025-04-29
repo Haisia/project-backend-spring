@@ -8,6 +8,8 @@ import com.haisia.backend.blog.studynote.entity.StudyNote;
 import com.haisia.backend.blog.studynote.entity.StudyNoteCategory;
 import com.haisia.backend.blog.studynote.repository.StudyNoteCategoryRepository;
 import com.haisia.backend.blog.studynote.repository.StudyNoteRepository;
+import com.haisia.backend.common.enums.ResponseCode;
+import com.haisia.backend.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,14 +31,22 @@ public class StudyNoteServiceImpl implements StudyNoteService {
 
   @Override
   public Long createStudyNote(CreateStudyNoteRequest request) {
-    StudyNoteCategory foundCategory = categoryRepository.findById(request.getCategoryId()).orElseThrow();
+    StudyNoteCategory foundCategory = categoryRepository.findById(request.getCategoryId())
+      .orElseThrow(() -> new ApplicationException(
+        ResponseCode.DATABASE_ERROR,
+        String.format("[blog_StudyNodeCategory 조회 실패] id=%s", request.getCategoryId())
+      ));
     StudyNote createdStudyNote = foundCategory.addStudyNote(request.getTitle(), request.getContent());
     return studyNoteRepository.save(createdStudyNote).getId();
   }
 
   @Override
   public GetStudyNoteResponse getStudyNote(Long id) {
-    StudyNote studyNote = studyNoteRepository.findById(id).orElseThrow();
+    StudyNote studyNote = studyNoteRepository.findById(id)
+      .orElseThrow(() -> new ApplicationException(
+        ResponseCode.DATABASE_ERROR,
+        String.format("[blog_StudyNote 조회 실패] id=%s", id)
+      ));
     return GetStudyNoteResponse.from(studyNote);
   }
 

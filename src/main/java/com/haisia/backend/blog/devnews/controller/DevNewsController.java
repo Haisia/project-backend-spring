@@ -3,6 +3,7 @@ package com.haisia.backend.blog.devnews.controller;
 import com.haisia.backend.blog.devnews.dto.DevNewsRequest;
 import com.haisia.backend.blog.devnews.dto.DevNewsResponse;
 import com.haisia.backend.blog.devnews.service.DevNewsService;
+import com.haisia.backend.common.dto.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,20 +21,20 @@ public class DevNewsController {
   private final DevNewsService devNewsService;
 
   @PostMapping
-  public ResponseEntity<Void> postDevNews(@RequestBody DevNewsRequest request) {
+  public ResponseEntity<ResponseData<?>> postDevNews(@RequestBody DevNewsRequest request) {
     devNewsService.postDevNews(request);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.ok(ResponseData.success(null));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<DevNewsResponse> getDevNews(@PathVariable Long id) {
-    DevNewsResponse response = devNewsService.getDevNews(id);
-    return ResponseEntity.ok(response);
+  public ResponseEntity<ResponseData<DevNewsResponse>> getDevNews(@PathVariable Long id) {
+    DevNewsResponse result = devNewsService.getDevNews(id);
+    return ResponseEntity.ok(ResponseData.success(result));
   }
 
   @GetMapping("/all")
-  public ResponseEntity<DevNewsResponse> getAllDevNews() {
-    DevNewsResponse response = devNewsService.getAllDevNews();
-    return ResponseEntity.ok(response);
+  public ResponseEntity<ResponseData<DevNewsResponse>> getAllDevNews() {
+    DevNewsResponse result = devNewsService.getAllDevNews();
+    return ResponseEntity.ok(ResponseData.success(result));
   }
 }
