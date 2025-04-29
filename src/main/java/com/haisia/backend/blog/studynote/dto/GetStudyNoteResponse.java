@@ -1,6 +1,6 @@
 package com.haisia.backend.blog.studynote.dto;
 
-import com.haisia.backend.blog.studynote.entity.StudyNote;
+import com.haisia.backend.blog.studynote.entity.StudyNotePost;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class GetStudyNoteResponse {
   public String title;
   public String content;
 
-  public static GetStudyNoteResponse from(StudyNote entity) {
+  public static GetStudyNoteResponse from(StudyNotePost entity) {
     return GetStudyNoteResponse.builder()
       .categoryId(entity.getCategory().getId())
       .categoryTitle(entity.getCategory().getTitle())

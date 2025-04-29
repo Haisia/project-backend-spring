@@ -11,11 +11,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
 @Table(name = "blog_project_log_post")
 @Entity
@@ -34,7 +35,7 @@ public class ProjectLogPost extends BaseJpaEntity {
     this.contentData = contentData;
   }
 
-  public static ProjectLogPost of(BlogContentData contentData) {
+  protected static ProjectLogPost of(BlogContentData contentData) {
     return new ProjectLogPost(contentData);
   }
 }

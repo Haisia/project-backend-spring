@@ -1,6 +1,7 @@
 package com.haisia.backend.blog.studynote.dto;
 
 import com.haisia.backend.blog.studynote.entity.StudyNoteCategory;
+import com.haisia.backend.blog.studynote.entity.StudyNotePost;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,10 +30,10 @@ public class GetAllStudyNoteResponse {
   protected static class Category {
     public Long id;
     public String title;
-    public List<StudyNote> studyNotes = new ArrayList<>();
+    public List<StudyNote> posts = new ArrayList<>();
 
     public static Category from(StudyNoteCategory entity) {
-      List<StudyNote> studyNotes = entity.getStudyNotes()
+      List<StudyNote> studyNotes = entity.getPosts()
         .stream()
         .map(StudyNote::from)
         .toList();
@@ -40,12 +41,10 @@ public class GetAllStudyNoteResponse {
       return Category.builder()
         .id(entity.getId())
         .title(entity.getTitle())
-        .studyNotes(studyNotes)
+        .posts(studyNotes)
         .build();
     }
-
   }
-
 
   @Builder
   @NoArgsConstructor @AllArgsConstructor
@@ -55,7 +54,7 @@ public class GetAllStudyNoteResponse {
     public String title;
     public String content;
 
-    public static StudyNote from(com.haisia.backend.blog.studynote.entity.StudyNote entity) {
+    public static StudyNote from(StudyNotePost entity) {
       return StudyNote.builder()
         .id(entity.getId())
         .title(entity.getContentData().getTitle())

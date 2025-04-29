@@ -11,14 +11,16 @@ import java.time.LocalDateTime;
 @Getter @Setter
 public class DevNewsDto {
   public Long id;
-  public BlogContentData contentData;
+  public String title;
+  public String content;
   public LocalDateTime createdAt;
   public LocalDateTime updatedAt;
 
   public static DevNewsDto from(DevNews entity) {
     return DevNewsDto.builder()
       .id(entity.getId())
-      .contentData(entity.getContentData())
+      .title(entity.getContentData().getTitle())
+      .content(entity.getContentData().getContent())
       .createdAt(entity.getCreatedAt())
       .updatedAt(entity.getUpdatedAt())
       .build();

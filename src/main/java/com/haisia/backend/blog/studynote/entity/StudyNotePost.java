@@ -19,12 +19,12 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
-@Table(name = "blog_study_note")
+@Table(name = "blog_study_note_post")
 @Entity
-public class StudyNote extends BaseJpaEntity {
+public class StudyNotePost extends BaseJpaEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blogstudynote_seq_gen")
-  @SequenceGenerator(name = "blogstudynote_seq_gen", sequenceName = "blogstudynote_seq", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blogstudynotepost_seq_gen")
+  @SequenceGenerator(name = "blogstudynotepost_seq_gen", sequenceName = "blogstudynotepost_seq", allocationSize = 1)
   private Long id;
   private BlogContentData contentData;
 
@@ -32,12 +32,12 @@ public class StudyNote extends BaseJpaEntity {
   @JoinColumn(name = "blog_study_note_category_id")
   private StudyNoteCategory category;
 
-  private StudyNote(BlogContentData contentData) {
+  private StudyNotePost(BlogContentData contentData) {
     this.contentData = contentData;
   }
 
-  public static StudyNote of(String title, String content) {
+  protected static StudyNotePost of(String title, String content) {
     BlogContentData contentData = BlogContentData.of(title, content);
-    return new StudyNote(contentData);
+    return new StudyNotePost(contentData);
   }
 }

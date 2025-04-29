@@ -4,7 +4,7 @@ import com.haisia.backend.blog.studynote.dto.CreateStudyNoteCategoryRequest;
 import com.haisia.backend.blog.studynote.dto.CreateStudyNoteRequest;
 import com.haisia.backend.blog.studynote.dto.GetAllStudyNoteResponse;
 import com.haisia.backend.blog.studynote.dto.GetStudyNoteResponse;
-import com.haisia.backend.blog.studynote.entity.StudyNote;
+import com.haisia.backend.blog.studynote.entity.StudyNotePost;
 import com.haisia.backend.blog.studynote.entity.StudyNoteCategory;
 import com.haisia.backend.blog.studynote.repository.StudyNoteCategoryRepository;
 import com.haisia.backend.blog.studynote.repository.StudyNoteRepository;
@@ -36,18 +36,18 @@ public class StudyNoteServiceImpl implements StudyNoteService {
         ResponseCode.DATABASE_ERROR,
         String.format("[blog_StudyNodeCategory 조회 실패] id=%s", request.getCategoryId())
       ));
-    StudyNote createdStudyNote = foundCategory.addStudyNote(request.getTitle(), request.getContent());
-    return studyNoteRepository.save(createdStudyNote).getId();
+    StudyNotePost createdStudyNotePost = foundCategory.addStudyNote(request.getTitle(), request.getContent());
+    return studyNoteRepository.save(createdStudyNotePost).getId();
   }
 
   @Override
   public GetStudyNoteResponse getStudyNote(Long id) {
-    StudyNote studyNote = studyNoteRepository.findById(id)
+    StudyNotePost studyNotePost = studyNoteRepository.findById(id)
       .orElseThrow(() -> new ApplicationException(
         ResponseCode.DATABASE_ERROR,
         String.format("[blog_StudyNote 조회 실패] id=%s", id)
       ));
-    return GetStudyNoteResponse.from(studyNote);
+    return GetStudyNoteResponse.from(studyNotePost);
   }
 
   @Override

@@ -27,7 +27,7 @@ public class TroubleshootingPost extends BaseJpaEntity {
     this.contentData = BlogContentData.of(title, content);
   }
 
-  public static TroubleshootingPost of(String title, String content) {
+  protected static TroubleshootingPost of(String title, String content) {
     return new TroubleshootingPost(title, content);
   }
 }

@@ -32,7 +32,7 @@ public class TroubleshootingCategory extends BaseJpaEntity {
     this.title = title;
   }
 
-  public static TroubleshootingCategory of(String title) {
+  protected static TroubleshootingCategory of(String title) {
     return new TroubleshootingCategory(title);
   }
 

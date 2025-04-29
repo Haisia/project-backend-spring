@@ -3,12 +3,9 @@ package com.haisia.backend.blog.devnews.entity;
 import com.haisia.backend.blog.common.vo.BlogContentData;
 import com.haisia.backend.common.entity.BaseJpaEntity;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
 @Table(name = "blog_dev_news")
 @Entity
@@ -21,7 +18,7 @@ public class DevNews extends BaseJpaEntity {
   private BlogContentData contentData;
 
   @Builder
-  public DevNews(Long id, String title, String content) {
+  protected DevNews(Long id, String title, String content) {
     this.id = id;
     this.contentData = new BlogContentData(title, content);
   }
