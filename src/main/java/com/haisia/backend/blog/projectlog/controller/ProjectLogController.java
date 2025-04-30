@@ -77,8 +77,8 @@ public class ProjectLogController {
     }
   )
   @GetMapping
-  public ResponseEntity<ResponseData<GetProjectLogPostResponse>> getProjectLog(@RequestParam Long id) {
-    GetProjectLogPostResponse result = projectLogService.getProjectLog(id);
+  public ResponseEntity<ResponseData<GetProjectLogPostResponse>> getProjectLog(@RequestParam Long projectId) {
+    GetProjectLogPostResponse result = projectLogService.getProjectLog(projectId);
     return ResponseEntity.ok(ResponseData.success(result));
   }
 
