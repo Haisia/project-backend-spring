@@ -40,6 +40,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            echo "Running stater.sh..."
-            chmod +x ~/stater.sh
-            ~/stater.sh
+            echo "Running starter.sh..."
+            chmod +x ~/starter.sh
+            ~/starter.sh
