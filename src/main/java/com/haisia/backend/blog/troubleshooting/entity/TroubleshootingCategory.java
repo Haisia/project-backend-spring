@@ -26,6 +26,7 @@ public class TroubleshootingCategory extends BaseJpaEntity {
   private Troubleshooting troubleshooting;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", orphanRemoval = true, fetch = FetchType.LAZY)
+  @OrderBy("id ASC")
   private List<TroubleshootingPost> posts = new ArrayList<>();
 
   protected TroubleshootingCategory(String title) {

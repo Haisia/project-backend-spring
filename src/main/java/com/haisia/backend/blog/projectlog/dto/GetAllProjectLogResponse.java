@@ -33,7 +33,7 @@ public class GetAllProjectLogResponse {
     private List<Category> categories = new ArrayList<>();
 
     public static Project from(ProjectLog entity) {
-      List<Category> categories = entity.getProjectLogCategories().stream()
+      List<Category> categories = entity.getCategories().stream()
         .map(Category::from)
         .toList();
 
@@ -56,7 +56,7 @@ public class GetAllProjectLogResponse {
     private List<Post> posts = new ArrayList<>();
 
     public static Category from(ProjectLogCategory entity) {
-      List<Post> posts = entity.getProjectLogPosts().stream()
+      List<Post> posts = entity.getPosts().stream()
         .map(Post::from)
         .toList();
 

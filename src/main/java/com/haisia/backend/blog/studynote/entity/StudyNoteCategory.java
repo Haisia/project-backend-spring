@@ -1,15 +1,7 @@
 package com.haisia.backend.blog.studynote.entity;
 
 import com.haisia.backend.common.entity.BaseJpaEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +22,7 @@ public class StudyNoteCategory extends BaseJpaEntity {
   private String title;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", orphanRemoval = true, fetch = FetchType.LAZY)
+  @OrderBy("id ASC")
   private List<StudyNotePost> posts = new ArrayList<>();
 
   private StudyNoteCategory(String title) {

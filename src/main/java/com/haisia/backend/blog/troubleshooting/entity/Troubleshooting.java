@@ -22,6 +22,7 @@ public class Troubleshooting extends BaseJpaEntity {
   private String title;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "troubleshooting", orphanRemoval = true)
+  @OrderBy("id ASC")
   private List<TroubleshootingCategory> categories = new ArrayList<>();
 
   protected Troubleshooting(String title) {

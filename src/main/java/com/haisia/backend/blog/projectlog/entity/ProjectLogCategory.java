@@ -1,17 +1,7 @@
 package com.haisia.backend.blog.projectlog.entity;
 
 import com.haisia.backend.blog.common.vo.BlogContentData;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +26,8 @@ public class ProjectLogCategory {
   private ProjectLog projectLog;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", orphanRemoval = true, fetch = FetchType.LAZY)
-  private List<ProjectLogPost> projectLogPosts = new ArrayList<>();
+  @OrderBy("id ASC")
+  private List<ProjectLogPost> posts = new ArrayList<>();
 
   private ProjectLogCategory(String title) {
     this.title = title;
@@ -49,7 +40,7 @@ public class ProjectLogCategory {
   public ProjectLogPost addPost(String title, String content) {
     BlogContentData contentData = BlogContentData.of(title, content);
     ProjectLogPost createdPost = ProjectLogPost.of(contentData);
-    projectLogPosts.add(createdPost);
+    posts.add(createdPost);
     createdPost.setCategory(this);
     return createdPost;
   }
