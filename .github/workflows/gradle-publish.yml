@@ -47,6 +47,6 @@ jobs:
           mkdir -p ~/logs
           cd ~/deploy
           latest_jar=$(ls -t *.jar | head -n 1)
-          nohup java -jar "$latest_jar" > ~/logs/output.log 2>&1 &
+          nohup java -jar "$latest_jar" > ~/logs/output.log 2>&1 & disown
 
           echo "Application deployed and running in background."
