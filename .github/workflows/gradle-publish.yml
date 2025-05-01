@@ -50,3 +50,5 @@ jobs:
           nohup java -jar "$latest_jar" > ~/logs/output.log 2>&1 & disown
 
           echo "Application deployed and running in background."
+
+          exit 0
