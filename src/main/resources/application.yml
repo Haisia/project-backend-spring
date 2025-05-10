@@ -30,3 +30,22 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui
+
+management:
+  info:
+    java:
+      enabled: true
+    os:
+      enabled: true
+  endpoint:
+    health:
+      show-components: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true

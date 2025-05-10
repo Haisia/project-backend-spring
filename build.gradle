@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.3.10'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'org.asciidoctor.jvm.convert' version '3.3.2'
+	id 'com.gorylenko.gradle-git-properties' version '2.4.1'
 }
 
 group = 'com.haisia'
@@ -42,6 +43,7 @@ dependencies {
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+	implementation 'io.micrometer:micrometer-registry-prometheus'
 
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -57,4 +59,8 @@ tasks.named('test') {
 tasks.named('asciidoctor') {
 	inputs.dir snippetsDir
 	dependsOn test
+}
+
+springBoot {
+	buildInfo()
 }
