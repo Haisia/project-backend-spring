@@ -32,6 +32,8 @@ springdoc:
     path: /swagger-ui
 
 management:
+  server:
+    port: 8081
   info:
     java:
       enabled: true
