@@ -24,14 +24,17 @@ jobs:
       - name: Build JAR with Gradle
         run: ./gradlew clean build -x test
 
+      - name: Prepare JAR for SCP
+        run: cp build/libs/backend-0.0.1-SNAPSHOT.jar app.jar
+
       - name: Copy JAR to Oracle Cloud as ~/app.jar
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "build/libs/backend-0.0.1-SNAPSHOT.jar"
-          target: "/home/haisia/app.jar"
+          source: "app.jar"
+          target: "/home/haisia/"
 
       - name: Run starter.sh on server
         uses: appleboy/ssh-action@v1.0.3
