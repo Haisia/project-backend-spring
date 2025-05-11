@@ -19,7 +19,7 @@ public class GitMetricsConfiguration {
     if (gitProperties != null) {
       Gauge.builder("application.info", this, (value) -> 1.0)
         .description("Application Git Information")
-        .tag("git_commit_id", gitProperties.getCommitId())
+        .tag("git_commit_id", gitProperties.getCommitId().substring(0,7))
         .tag("git_branch", gitProperties.getBranch())
         .register(meterRegistry);
     }
