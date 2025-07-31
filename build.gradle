@@ -37,10 +37,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	implementation 'com.oracle.database.security:osdt_cert:21.3.0.0'
-	implementation 'com.oracle.database.security:oraclepki:21.3.0.0'
-	implementation 'com.oracle.database.security:osdt_core:21.3.0.0'
-	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+	implementation 'org.postgresql:postgresql:42.7.7'
 
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 	implementation 'io.micrometer:micrometer-registry-prometheus'
